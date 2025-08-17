@@ -3,7 +3,7 @@ import path from "path";
 
 config({ path: path.join(__dirname, "../.env") });
 
-import { PrismaClient } from "@/app/generated/prisma";
+import { PrismaClient } from "../generated/prisma";
 import { parseCourses } from "./courses";
 
 const prisma = new PrismaClient();
