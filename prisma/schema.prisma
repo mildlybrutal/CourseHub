@@ -21,7 +21,7 @@ model User{
   password String
 }
 
-model Courses{
+model Course{
   id Int @id @default(autoincrement())
   subject String
   title String
