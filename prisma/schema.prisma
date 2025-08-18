@@ -26,7 +26,14 @@ model Course{
   subject String
   title String
   url String
+  tags  CourseTag[]
   createdAt   DateTime @default(now())
+}
+
+model CourseTag{
+  id  Int @id @default(autoincrement())
+  name String @unique
+  course  Course[]
 }
 
 

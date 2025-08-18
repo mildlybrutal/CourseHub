@@ -7,11 +7,16 @@ export async function GET(req: Request) {
 	const { searchParams } = new URL(req.url);
 	const page = parseInt(searchParams.get("page") || "1");
 	const limit = parseInt(searchParams.get("limit") || "20");
+	 const subject = searchParams.get("subject");
 
 	const skip = (page - 1) * limit;
 
 	try {
+
+		const where = subject ? {subject} :{}
+
 		const courses = await prisma.course.findMany({
+			where,
 			orderBy: {
 				id: "asc",
 			},
@@ -19,7 +24,7 @@ export async function GET(req: Request) {
 			take: limit,
 		});
 
-		const totalCourses = await prisma.course.count();
+		const totalCourses = await prisma.course.count({where});
 
 		return NextResponse.json({
 			data: courses,
