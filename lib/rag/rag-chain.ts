@@ -5,27 +5,57 @@ import { PromptTemplate } from "@langchain/core/prompts";
 
 export async function getRagChain() {
 	const retriever = await getRetriever();
+
 	const prompt = PromptTemplate.fromTemplate(`
-        You are a course recommendation assistant.
-        Given a user query and some retrieved courses, suggest the most relevant courses.
+You are a course recommendation assistant.
+The user asks: {query}
 
-        Query: {query}
-        Courses: {context}
+Here are the retrieved courses:
+{context}
 
-        Answer in a clear, helpful way.
-    `);
+Return the output strictly as a JSON array of objects with this shape:
+[
+  {
+    "title": "Course title",
+    "url": "Course url",
+    "subject": "Subject/category",
+    "reason": "Why this course is a good match"
+  }
+]
+
+Do not include any extra text outside the JSON.
+  `);
 
 	return RunnableSequence.from([
 		{
 			context: async (input: { query: string }) => {
-				const docs = await retriever._getRelevantDocuments(input.query);
+				const docs = await retriever.getRelevantDocuments(input.query);
 				return docs
-					.map((d) => `- ${d.metadata.title} (${d.metadata.url})`)
-					.join("\n");
+					.map(
+						(d) =>
+							`- Title: ${d.metadata.title}\n  Subject: ${d.metadata.subject}\n  Url: ${d.metadata.url}\n  Description: ${d.pageContent}`
+					)
+					.join("\n\n");
 			},
 			query: (input: { query: string }) => input.query,
 		},
 		prompt,
 		llm,
+		{
+			output: async (raw: any) => {
+				try {
+					return JSON.parse(raw);
+				} catch {
+					return [
+						{
+							title: "Parsing error",
+							url: "",
+							subject: "",
+							reason: raw,
+						},
+					];
+				}
+			},
+		},
 	]);
 }

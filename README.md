@@ -58,8 +58,6 @@ CourseHub is a comprehensive course management platform that automatically curat
 - **Next.js 15** - React framework with App Router
 - **TypeScript** - Type-safe development
 - **Tailwind CSS** - Utility-first styling
-- **Radix UI** - Accessible component primitives
-- **Lucide Icons** - Beautiful icon library
 
 ### **Backend & Database**
 - **Prisma ORM** - Type-safe database client

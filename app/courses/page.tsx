@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import CourseCard from "../components/CourseCard";
 import Pagination from "../components/Pagination";
+import Search from "../search/page";
 
 interface PaginationInfo {
 	total: number;
@@ -136,7 +137,9 @@ export default function Courses() {
 						</div>
 					</div>
 				</div>
-
+				<div>
+					<Search />
+				</div>
 				{/* Filter Section */}
 				<div className="max-w-7xl mx-auto px-6 py-6 border-b border-emerald-500/10">
 					<div className="flex flex-wrap items-center gap-4">
@@ -157,7 +160,11 @@ export default function Courses() {
 							>
 								<option value="">All Subjects</option>
 								{subjects.map((subject) => (
-									<option key={subject} value={subject} className="bg-gray-900 text-white">
+									<option
+										key={subject}
+										value={subject}
+										className="bg-gray-900 text-white"
+									>
 										{subject}
 									</option>
 								))}
