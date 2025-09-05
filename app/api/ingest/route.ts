@@ -7,7 +7,11 @@ import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 
 export async function POST() {
 	try {
-		const courses = await prisma.course.findMany();
+		const courses = await prisma.course.findMany({
+			include:{
+				tags:true
+			}
+		});
 		if (!courses.length) {
 			return NextResponse.json(
 				{ message: "No courses found" },
@@ -21,31 +25,46 @@ export async function POST() {
 			chunkSize: 1000,
 			chunkOverlap: 200,
 		});
-		const batchSize = 200;
+		const batchSize = 50;
 		for (let i = 0; i < courses.length; i += batchSize) {
 			const batch = courses.slice(i, i + batchSize);
+			console.log(`Processing batch ${Math.floor(i/batchSize) + 1}/${Math.ceil(courses.length/batchSize)}`);
 
-			const texts = batch.map((c) => c.title);
-			const metadatas = batch.map((c) => ({
-				id: c.id,
-				title: c.title,
-				url: c.url,
-			}));
+			// Create richer content for embedding
+			const documents = batch.map((course) => {
+				// Combine title, subject, and tags for better context
+				const tags = course.tags.map(tag => tag.name).join(", ");
+				const content = `${course.title}\nSubject: ${course.subject}\nTags: ${tags}`;
+				
+				return {
+					pageContent: content,
+					metadata: {
+						id: course.id,
+						title: course.title,
+						subject: course.subject,
+						url: course.url,
+						tags: tags
+					}
+				};
+			});
 
-			await vectorStore.addDocuments(
-				texts.map((t, i) => ({
-					pageContent: t,
-					metadata: metadatas[i],
-				}))
-			);
+			try {
+				await vectorStore.addDocuments(documents);
+				console.log(` Processed ${documents.length} courses in this batch`);
+			} catch (error) {
+				console.error(` Error processing batch starting at index ${i}:`, error);
+				
+			}
 		}
+
 		return NextResponse.json({
-			message: "✅ Courses embedded into pgvector",
+			message: `✅ ${courses.length} courses embedded into pgvector`,
+			total: courses.length
 		});
-	} catch (err) {
+	} catch (err:any) {
 		console.error("Ingestion error:", err);
 		return NextResponse.json(
-			{ error: "Failed to ingest courses" },
+			{ error: "Failed to ingest courses", details: err.message },
 			{ status: 500 }
 		);
 	}

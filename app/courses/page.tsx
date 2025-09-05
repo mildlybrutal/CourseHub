@@ -127,7 +127,7 @@ export default function Courses() {
 						<div className="flex justify-between items-center">
 							<div>
 								<h1 className="text-3xl font-bold text-white">
-									CourseHub
+									CoursePool
 								</h1>
 								<p className="mt-2 text-emerald-100/80 text-sm">
 									All of Computer Science Courses, in one
