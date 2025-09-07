@@ -2,7 +2,7 @@
 
 > **All of Computer Science Courses, in one place.**
 
-CourseHub is a comprehensive course management platform that automatically curates and organizes computer science courses from GitHub repositories. Built with Next.js, it features intelligent data parsing, progress tracking, AI-powered search, and seamless course discovery.
+CoursePool is a comprehensive course management platform that automatically curates and organizes computer science courses from GitHub repositories. Built with Next.js, it features intelligent data parsing, progress tracking, AI-powered search, and seamless course discovery.
 
 ##  Features
 
