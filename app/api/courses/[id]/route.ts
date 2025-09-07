@@ -1,10 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { PrismaClient } from "@/app/generated/prisma";
 
 const prisma = new PrismaClient();
 
 export async function GET(
-	res: NextResponse,
 	{ params }: { params: { id: string } }
 ) {
 	const courseId = parseInt(params.id);
