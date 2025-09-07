@@ -3,10 +3,11 @@ import { PrismaClient } from "@/app/generated/prisma";
 
 const prisma = new PrismaClient();
 
-export async function GET(
-    request: Request,
-    { params }: { params: { id: string } }
-) {
+interface RouteContext {
+	params: { id: string };
+}
+
+export async function GET(request: Request, { params }: RouteContext) {
 	const courseId = parseInt(params.id);
 
 	try {
