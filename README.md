@@ -1,58 +1,51 @@
-# CourseHub 🎓
+# CoursePool 
 
 > **All of Computer Science Courses, in one place.**
 
 CourseHub is a comprehensive course management platform that automatically curates and organizes computer science courses from GitHub repositories. Built with Next.js, it features intelligent data parsing, progress tracking, AI-powered search, and seamless course discovery.
 
-## ✨ Features
+##  Features
 
-### 🤖 **Intelligent Data Ingestion**
+### **Intelligent Data Ingestion**
 - **AST-Powered Parsing**: Automatically extracts course data from GitHub README files using Abstract Syntax Trees
 - **Unified Format**: Parses structured markdown content using `remark-parse` and `unified` processors
 - **Real-time Updates**: Fetches course data from [cs-video-courses](https://github.com/Developer-Y/cs-video-courses) repository
 - **Smart Classification**: Automatically categorizes courses by subject and topic
 
-### 📊 **Progress Management System**
+###  **Progress Management System**
 - **Individual Progress Tracking**: Monitor completion status for each course video
 - **Persistent Storage**: Progress saved in browser localStorage for seamless experience
 - **Visual Progress Indicators**: Real-time progress bars and completion percentages
 - **Course Statistics**: Track total videos, completed videos, and remaining content
 - **Session Management**: Resume courses exactly where you left off
 
-### 🔍 **Advanced Search & Discovery**
+###  **Advanced Search & Discovery**
 - **RAG-Powered Search**: Retrieval-Augmented Generation using LangChain and Google Gemini AI
 - **Vector Embeddings**: Course content embedded using `text-embedding-004` model
 - **Semantic Search**: Find courses based on meaning, not just keywords
 - **PostgreSQL Vector Store**: Powered by pgvector extension for efficient similarity search
 - **Intelligent Recommendations**: AI-powered course suggestions based on user queries
 
-### 🏷️ **Subject-Based Filtering**
+###  **Subject-Based Filtering**
 - **Dynamic Categories**: Automatically extracted subject classifications
 - **Real-time Filtering**: Instant course filtering by subject area
 - **Multiple Subjects**: Support for diverse CS topics (Algorithms, Web Development, AI/ML, etc.)
 - **Clear Filter Options**: Easy-to-use dropdown interface with clear/reset functionality
 
-### 🎥 **Enhanced Course Experience** (Future Enhancement)
+###  **Enhanced Course Experience** (Future Enhancement)
 - **YouTube Integration**: Seamless embedded video playback
 - **Course Playlists**: Multi-video course support with navigation controls
 - **Responsive Design**: Optimized for desktop and mobile viewing
 - **External Link Handling**: Graceful fallback for non-embeddable content
 - **Course Metadata**: Comprehensive course information display
 
-### 🔐 **Authentication System** (Future Enhancement)
+###  **Authentication System** (Future Enhancement)
 - **Google OAuth Integration**: Secure sign-in with Google accounts
 - **Better Auth Framework**: Built with modern authentication patterns
 - **Session Management**: Secure user sessions with configurable expiration
 - **User Profiles**: Personalized dashboard and course enrollment tracking
 
-### 📱 **Modern UI/UX**
-- **Tailwind CSS Styling**: Modern, responsive design system
-- **Dark Mode Optimized**: Beautiful emerald-themed dark interface
-- **Component Architecture**: Reusable UI components with shadcn/ui
-- **Smooth Animations**: Engaging hover effects and transitions
-- **Pagination Support**: Efficient browsing of large course collections
-
-## 🛠️ Technology Stack
+##  Technology Stack
 
 ### **Frontend**
 - **Next.js 15** - React framework with App Router
@@ -76,7 +69,7 @@ CourseHub is a comprehensive course management platform that automatically curat
 - **AST Parsing** - Abstract Syntax Tree manipulation
 - **Axios** - HTTP client for data fetching
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18+ and npm/yarn/pnpm
@@ -143,7 +136,7 @@ CourseHub is a comprehensive course management platform that automatically curat
 
    Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 course-next/
@@ -171,7 +164,7 @@ course-next/
 └── public/                       # Static assets
 ```
 
-## 🔧 API Endpoints
+##  API Endpoints
 
 ### Course Management
 - `GET /api/courses` - List courses with pagination and filtering
@@ -187,7 +180,7 @@ course-next/
 - `POST /api/auth/signout` - User logout
 - `GET /api/auth/session` - Get current session
 
-## 🎯 Key Features in Detail
+##  Key Features in Detail
 
 ### **AST-Based Course Parsing**
 The application uses a sophisticated parsing system that:
@@ -220,7 +213,7 @@ Dynamic categorization system:
 - **Clean Interface**: Dropdown selection with clear options
 - **URL State**: Filter state preserved in URL parameters
 
-## 🚧 Future Enhancements
+##  Future Enhancements
 
 ### **Planned Features**
 - [ ] **User Enrollment System**: Full course enrollment and management
@@ -239,7 +232,7 @@ Dynamic categorization system:
 - [ ] **API Documentation**: Comprehensive API documentation
 - [ ] **Testing Suite**: Unit and integration test coverage
 
-## 🤝 Contributing
+##  Contributing
 
 We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
@@ -249,11 +242,11 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [cs-video-courses](https://github.com/Developer-Y/cs-video-courses) - Source of course data
 - [LangChain](https://langchain.com/) - AI application framework
@@ -261,12 +254,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Prisma](https://prisma.io/) - Database toolkit
 - [Tailwind CSS](https://tailwindcss.com/) - Styling framework
 
-## 📞 Support
 
-If you have any questions or need help, please:
-- Open an issue on GitHub
-- Join our community discussions
-- Check the documentation
 
 ---
 
