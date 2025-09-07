@@ -4,7 +4,8 @@ import { PrismaClient } from "@/app/generated/prisma";
 const prisma = new PrismaClient();
 
 export async function GET(
-	{ params }: { params: { id: string } }
+    request: Request,
+    { params }: { params: { id: string } }
 ) {
 	const courseId = parseInt(params.id);
 
