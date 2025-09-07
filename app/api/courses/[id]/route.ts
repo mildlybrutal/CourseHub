@@ -3,12 +3,12 @@ import { PrismaClient } from "@/app/generated/prisma";
 
 const prisma = new PrismaClient();
 
-interface RouteContext {
-	params: { id: string };
-}
 
-export async function GET(request: Request, { params }: RouteContext) {
-	const courseId = parseInt(params.id);
+export async function GET(
+	request: Request,
+	context: { params: { id: string } }
+) {
+	const courseId = parseInt(context.params.id);
 
 	try {
 		const course = await prisma.course.findUnique({
