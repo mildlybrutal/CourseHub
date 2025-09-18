@@ -1,79 +1,122 @@
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import {
+	Card,
+	CardContent,
+	CardFooter,
+	CardHeader,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { motion } from "motion/react"
 
 interface CardProps {
 	title: string;
 	subject: string;
 	url: string;
+	description?: string;
 }
 
-export default function CourseCard({ title, subject, url }: CardProps) {
+export default function CourseCard({
+	title,
+	subject,
+	url,
+	description,
+}: CardProps) {
 	return (
-		<Card className="group relative bg-white/5 backdrop-blur-sm border-white/10 hover:border-white/20 shadow-xl hover:shadow-2xl hover:shadow-pink-500/10 transition-all duration-300 min-h-[280px] hover:scale-[1.02] hover:-translate-y-1">
-			{/* Subtle glow effect on hover */}
-			<div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
-
-			{/* Subtle inner glow */}
-			<div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-60"></div>
-
-			<CardHeader className="relative z-10">
-				{/* Subject badge and indicator */}
-				<div className="flex items-center justify-between mb-2">
-					<Badge variant="outline" className="bg-white/10 text-white border-white/20 backdrop-blur-sm">
-						{subject}
-					</Badge>
-					<div className="w-2 h-2 bg-white/60 rounded-full shadow-sm"></div>
-				</div>
-
-				{/* Title */}
-				<h3 className="text-xl font-bold text-white line-clamp-3 group-hover:text-white/90 transition-colors duration-200">
-					{title}
-				</h3>
-
-				{/* Decorative line */}
-				<div className="w-12 h-0.5 bg-gradient-to-r from-pink-400/80 to-purple-500/80 group-hover:w-20 transition-all duration-300 shadow-sm"></div>
-			</CardHeader>
-
-			<CardContent className="relative z-10 flex-1">
-				{/* Content area can be expanded if needed */}
-			</CardContent>
-
-			<CardFooter className="relative z-10 mt-auto">
-				<Button 
-					asChild 
-					className="w-full bg-white/10 hover:bg-white/20 text-white border-white/20 hover:border-white/30 backdrop-blur-sm"
-					variant="outline"
-				>
-					<a
-						href={url}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="group/btn inline-flex items-center justify-center w-full"
-					>
-						<span className="mr-2">Explore Course</span>
-						<svg
-							className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
+		<motion.div
+			initial={{ opacity: 0, y: 10 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.3 }}
+			whileHover={{ y: -2 }}
+			whileTap={{ scale: 0.995 }}
+			className="relative"
+		>
+			<Card className="relative bg-white/5 backdrop-blur-sm border-white/10 shadow-xl min-h-[280px]">
+				<CardHeader className="relative z-10">
+					<div className="flex items-center justify-between mb-2">
+						<motion.div
+							initial={{ scale: 0.9 }}
+							animate={{ scale: 1 }}
+							transition={{ duration: 0.2, delay: 0.1 }}
 						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M13 7l5 5m0 0l-5 5m5-5H6"
-							/>
-						</svg>
-					</a>
-				</Button>
-			</CardFooter>
+							<Badge
+								variant="outline"
+								className="bg-blue-500/15 text-blue-200 border-blue-400/30 backdrop-blur-sm"
+							>
+								{subject}
+							</Badge>
+						</motion.div>
+						<div className="w-2 h-2 bg-blue-300/70 rounded-full shadow-sm" />
+					</div>
 
-			{/* Outer glow effect */}
-			<div className="absolute -inset-1 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+					<motion.h3 
+						className="text-xl font-bold text-white line-clamp-3"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						transition={{ duration: 0.3, delay: 0.2 }}
+					>
+						{title}
+					</motion.h3>
 
-			{/* Subtle border enhancement */}
-			<div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-		</Card>
+					<motion.div 
+						className="h-0.5 bg-gradient-to-r from-blue-400/80 via-cyan-400/60 to-indigo-500/80"
+						initial={{ width: 0 }}
+						animate={{ width: "3rem" }}
+						transition={{ duration: 0.4, delay: 0.3 }}
+					/>
+				</CardHeader>
+
+				<CardContent className="relative z-10 flex-1">
+					{description && (
+						<motion.p 
+							className="text-sm text-white/70"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.3, delay: 0.4 }}
+						>
+							{description}
+						</motion.p>
+					)}
+				</CardContent>
+
+				<CardFooter className="relative z-10 mt-auto">
+					<motion.div 
+						className="w-full"
+						whileHover={{ scale: 1.01 }}
+						whileTap={{ scale: 0.99 }}
+						transition={{ duration: 0.1 }}
+					>
+						<Button
+							asChild
+							className="w-full bg-blue-500/15 text-blue-100 border-blue-400/30 backdrop-blur-sm"
+							variant="outline"
+						>
+							<a
+								href={url}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-flex items-center justify-center w-full"
+							>
+								<span className="mr-2 font-medium">Start Learning</span>
+								<motion.svg
+									className="w-4 h-4"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+									whileHover={{ x: 2 }}
+									transition={{ duration: 0.2 }}
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M13 7l5 5m0 0l-5 5m5-5H6"
+									/>
+								</motion.svg>
+							</a>
+						</Button>
+					</motion.div>
+				</CardFooter>
+			</Card>
+		</motion.div>
 	);
 }

@@ -7,6 +7,7 @@ import Search from "../search/page";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
 
 interface PaginationInfo {
 	total: number;
@@ -16,6 +17,7 @@ interface PaginationInfo {
 }
 
 export default function Courses() {
+	const router = useRouter();
 	const [courses, setCourses] = useState<any[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [pagination, setPagination] = useState<PaginationInfo>({
@@ -107,9 +109,7 @@ export default function Courses() {
 				<div className="relative z-10 flex items-center justify-center min-h-screen">
 					<div className="flex flex-col items-center">
 						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white/40"></div>
-						<p className="mt-4 text-white/70">
-							Loading courses...
-						</p>
+						<p className="mt-4 text-white/70">Loading courses...</p>
 					</div>
 				</div>
 			</div>
@@ -138,7 +138,10 @@ export default function Courses() {
 				<div className="bg-white/5 backdrop-blur-sm shadow-sm border-b border-white/10">
 					<div className="max-w-7xl mx-auto px-6 py-8">
 						<div className="flex justify-between items-center">
-							<div>
+							<div
+								className="cursor-default hover:cursor-pointer"
+								onClick={() => router.push("/")}
+							>
 								<h1 className="text-3xl font-bold text-white">
 									CoursePool
 								</h1>
@@ -202,9 +205,15 @@ export default function Courses() {
 									Filtering...
 								</span>
 							) : (
-								<Badge variant="outline" className="bg-white/5 border-white/20 text-white/70">
-									{pagination.total} course{pagination.total !== 1 ? "s" : ""}
-									{selectedSubject ? ` in ${selectedSubject}` : ""}
+								<Badge
+									variant="outline"
+									className="bg-white/5 border-white/20 text-white/70"
+								>
+									{pagination.total} course
+									{pagination.total !== 1 ? "s" : ""}
+									{selectedSubject
+										? ` in ${selectedSubject}`
+										: ""}
 								</Badge>
 							)}
 						</div>
@@ -240,6 +249,7 @@ export default function Courses() {
 										title={course.title}
 										subject={course.subject}
 										url={course.url}
+										description={course.description}
 									/>
 								))}
 							</div>

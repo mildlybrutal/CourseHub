@@ -2,9 +2,10 @@
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function Hero() {
-    const router = useRouter();
+	const router = useRouter();
 	return (
 		<div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6 max-w-5xl mx-auto">
 			{/* Top Badge */}
