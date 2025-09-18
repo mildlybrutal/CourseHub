@@ -3,6 +3,8 @@
 import axios from "axios";
 import { useState } from "react";
 import CourseCard from "../components/CourseCard";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function Search() {
 	const [query, setQuery] = useState("");
@@ -30,12 +32,13 @@ export default function Search() {
 					value={query}
 					onChange={(e) => setQuery(e.target.value)}
 					placeholder="Search courses (e.g. best course for operating system)"
-					className="bg-gray-900 border border-emerald-500/30 rounded-lg px-3 py-2 text-white text-sm w-full"
+					className="bg-white/5 backdrop-blur-sm border-white/10 hover:border-white/20 shadow-xl hover:shadow-2xl hover:shadow-pink-500/10 transition-all duration-300 rounded-lg px-3 py-2 text-white text-sm w-full"
 				/>
 				<button
 					onClick={handleSearch}
-					className="px-4 py-2 bg-emerald-500/20 border border-emerald-500/30 rounded-lg text-emerald-300 hover:bg-emerald-500/30 transition-colors"
+					className=" px-4 py-2 rounded-2xl bg-white/10 hover:bg-white/20 text-white border-white/20 hover:border-white/30 backdrop-blur-sm"
 				>
+					{/* px-4 py-2 */}
 					Search
 				</button>
 			</div>

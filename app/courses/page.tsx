@@ -2,8 +2,11 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import CourseCard from "../components/CourseCard";
-import Pagination from "../components/Pagination";
+import PaginationWrapper from "../components/Pagination";
 import Search from "../search/page";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Label } from "@/components/ui/label";
 
 interface PaginationInfo {
 	total: number;
@@ -86,20 +89,25 @@ export default function Courses() {
 
 	if (loading && courses.length === 0) {
 		return (
-			<div className="min-h-screen w-full relative bg-black">
-				{/* Emerald Depths Background with Top Glow */}
+			<div className="min-h-screen w-full relative">
+				{/* Background matching hero design */}
 				<div
 					className="absolute inset-0 z-0"
 					style={{
-						background:
-							"radial-gradient(ellipse 80% 60% at 50% 0%, rgba(16, 185, 129, 0.25), transparent 70%), #000000",
+						background: "#020617",
+						backgroundImage: `
+        linear-gradient(to right, rgba(71,85,105,0.15) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(71,85,105,0.15) 1px, transparent 1px),
+        radial-gradient(circle at 50% 60%, rgba(236,72,153,0.15) 0%, rgba(168,85,247,0.05) 40%, transparent 70%)
+      `,
+						backgroundSize: "40px 40px, 40px 40px, 100% 100%",
 					}}
 				/>
 
 				<div className="relative z-10 flex items-center justify-center min-h-screen">
 					<div className="flex flex-col items-center">
-						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-400"></div>
-						<p className="mt-4 text-emerald-100/80">
+						<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white/40"></div>
+						<p className="mt-4 text-white/70">
 							Loading courses...
 						</p>
 					</div>
@@ -109,27 +117,32 @@ export default function Courses() {
 	}
 
 	return (
-		<div className="min-h-screen w-full relative bg-black">
-			{/* Emerald Depths Background with Top Glow */}
+		<div className="min-h-screen w-full relative bg-[#020617]">
+			{/* Background matching hero design */}
 			<div
 				className="absolute inset-0 z-0"
 				style={{
-					background:
-						"radial-gradient(ellipse 80% 60% at 50% 0%, rgba(16, 185, 129, 0.25), transparent 70%), #000000",
+					background: "#020617",
+					backgroundImage: `
+        linear-gradient(to right, rgba(71,85,105,0.15) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(71,85,105,0.15) 1px, transparent 1px),
+        radial-gradient(circle at 50% 60%, rgba(236,72,153,0.15) 0%, rgba(168,85,247,0.05) 40%, transparent 70%)
+      `,
+					backgroundSize: "40px 40px, 40px 40px, 100% 100%",
 				}}
 			/>
 
 			{/* Content with proper z-index */}
 			<div className="relative z-10">
 				{/* Header */}
-				<div className="bg-black/20 backdrop-blur-sm shadow-sm border-b border-emerald-500/20">
+				<div className="bg-white/5 backdrop-blur-sm shadow-sm border-b border-white/10">
 					<div className="max-w-7xl mx-auto px-6 py-8">
 						<div className="flex justify-between items-center">
 							<div>
 								<h1 className="text-3xl font-bold text-white">
 									CoursePool
 								</h1>
-								<p className="mt-2 text-emerald-100/80 text-sm">
+								<p className="mt-2 text-white/70 text-sm">
 									All of Computer Science Courses, in one
 									place. • Version 1.0
 								</p>
@@ -141,29 +154,29 @@ export default function Courses() {
 					<Search />
 				</div>
 				{/* Filter Section */}
-				<div className="max-w-7xl mx-auto px-6 py-6 border-b border-emerald-500/10">
+				<div className="max-w-7xl mx-auto px-6 py-6 border-b border-white/10">
 					<div className="flex flex-wrap items-center gap-4">
 						<div className="flex items-center gap-2">
-							<label
+							<Label
 								htmlFor="subject-filter"
-								className="text-emerald-100/80 text-sm font-medium"
+								className="text-white/70 text-sm font-medium"
 							>
 								Filter by Subject:
-							</label>
+							</Label>
 							<select
 								id="subject-filter"
 								value={selectedSubject}
 								onChange={(e) =>
 									handleSubjectChange(e.target.value)
 								}
-								className="bg-gray-900 border border-emerald-500/30 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 backdrop-blur-sm"
+								className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/10 backdrop-blur-sm"
 							>
 								<option value="">All Subjects</option>
 								{subjects.map((subject) => (
 									<option
 										key={subject}
 										value={subject}
-										className="bg-gray-900 text-white"
+										className="bg-slate-900 text-white"
 									>
 										{subject}
 									</option>
@@ -172,28 +185,27 @@ export default function Courses() {
 						</div>
 
 						{selectedSubject && (
-							<button
+							<Button
 								onClick={clearFilter}
-								className="px-3 py-1 text-xs bg-emerald-500/20 border border-emerald-500/30 rounded-full text-emerald-300 hover:bg-emerald-500/30 transition-colors"
+								variant="outline"
+								size="sm"
+								className="bg-white/10 border-white/20 text-white/90 hover:bg-white/20 hover:border-white/30 backdrop-blur-sm"
 							>
 								Clear Filter
-							</button>
+							</Button>
 						)}
 
-						<div className="text-emerald-100/60 text-sm">
+						<div className="text-white/60 text-sm">
 							{loading ? (
 								<span className="flex items-center gap-2">
-									<div className="animate-spin rounded-full h-4 w-4 border-b border-emerald-400"></div>
+									<div className="animate-spin rounded-full h-4 w-4 border-b border-white/40"></div>
 									Filtering...
 								</span>
 							) : (
-								`Showing ${pagination.total} course${
-									pagination.total !== 1 ? "s" : ""
-								}${
-									selectedSubject
-										? ` in ${selectedSubject}`
-										: ""
-								}`
+								<Badge variant="outline" className="bg-white/5 border-white/20 text-white/70">
+									{pagination.total} course{pagination.total !== 1 ? "s" : ""}
+									{selectedSubject ? ` in ${selectedSubject}` : ""}
+								</Badge>
 							)}
 						</div>
 					</div>
@@ -203,19 +215,20 @@ export default function Courses() {
 				<div className="max-w-7xl mx-auto px-6 py-8">
 					{courses.length === 0 && !loading ? (
 						<div className="text-center py-12">
-							<div className="text-emerald-100/60 text-lg">
+							<div className="text-white/60 text-lg">
 								No courses found
 								{selectedSubject
 									? ` for subject "${selectedSubject}"`
 									: ""}
 							</div>
 							{selectedSubject && (
-								<button
+								<Button
 									onClick={clearFilter}
-									className="mt-4 px-4 py-2 bg-emerald-500/20 border border-emerald-500/30 rounded-lg text-emerald-300 hover:bg-emerald-500/30 transition-colors"
+									variant="outline"
+									className="mt-4 bg-white/10 border-white/20 text-white/90 hover:bg-white/20 hover:border-white/30 backdrop-blur-sm"
 								>
 									View All Courses
-								</button>
+								</Button>
 							)}
 						</div>
 					) : (
@@ -233,7 +246,7 @@ export default function Courses() {
 
 							{/* Pagination Component */}
 							{pagination.totalPages > 1 && (
-								<Pagination
+								<PaginationWrapper
 									currentPage={pagination.page}
 									totalPages={pagination.totalPages}
 									onPageChange={handlePageChange}
